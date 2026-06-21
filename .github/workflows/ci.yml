@@ -1,0 +1,44 @@
+name: CI - Serviço de Pagamento
+
+on:
+  push:
+    branches:
+      - "**"
+
+  workflow_dispatch:
+
+  schedule:
+    - cron: "0 8 * * 1"
+
+jobs:
+  testes:
+    name: Testes Automatizados
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Executar testes
+        run: npm test
+
+      - name: Gerar relatório HTML
+        if: always()
+        run: npm run test:report
+
+      - name: Publicar relatório como artefato
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-de-testes
+          path: reports/
+          retention-days: 30
