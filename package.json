@@ -4,8 +4,8 @@
   "description": "Serviço de pagamento com armazenamento de histórico",
   "main": "src/servicoDePagamento.js",
   "scripts": {
-    "test": "mocha test/**/*.test.js",
-    "test:report": "mocha test/**/*.test.js --reporter mochawesome --reporter-options reportDir=reports,reportFilename=test-report"
+    "test": "mocha",
+    "test:report": "mocha --reporter mochawesome --reporter-options reportDir=reports,reportFilename=test-report"
   },
   "keywords": ["pagamento", "pagamentos"],
   "author": "",
